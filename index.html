@@ -3,22 +3,30 @@
 <head>
 <title>VUE JS</title>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-  var app = new Vue({
-    el: '#app',
-    data: {
-      message: 'Hello Vue!'
-    }
-  })
-}
-</script>
 </head>
 <body>
-
 <div id="app">
-  {{ message }}
+   <ol>
+    <!-- Now we provide each todo-item with the todo object    -->
+    <!-- it's representing, so that its content can be dynamic -->
+    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+  </ol>
 </div>
-
+<script>
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
+var app = new Vue({
+  el: '#app',
+  data: {
+    groceryList: [
+      { text: 'Vegetables' },
+      { text: 'Cheese' },
+      { text: 'Whatever else humans are supposed to eat' }
+    ]
+  }
+})
+</script>
 </body>
 </html>
