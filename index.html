@@ -1,32 +1,119 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>VUE JS</title>
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <title>VUE JS</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
+
 <body>
-<div id="app">
-   <ol>
-    <!-- Now we provide each todo-item with the todo object    -->
-    <!-- it's representing, so that its content can be dynamic -->
-    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
-  </ol>
-</div>
-<script>
-Vue.component('todo-item', {
-  props: ['todo'],
-  template: '<li>{{ todo.text }}</li>'
-})
-var app = new Vue({
-  el: '#app',
-  data: {
-    groceryList: [
-      { text: 'Vegetables' },
-      { text: 'Cheese' },
-      { text: 'Whatever else humans are supposed to eat' }
-    ]
-  }
-})
-</script>
+  <div id="app">
+    <ol>
+      <!-- Now we provide each todo-item with the todo object    -->
+      <!-- it's representing, so that its content can be dynamic -->
+      <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    </ol>
+    <span v-bind:id="'list-' + id">{{ msg | capitalize(0)}}</span>
+    <p v-if="seen">Now you see me</p>
+  </div>
+
+  <div id="no-key-example">
+    <template v-if="loginType === 'username'">
+      <label>Username</label>
+      <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address">
+    </template>
+    <button v-on:click.ctrl="toggleLoginType">Toggle login type</button>
+  </div>
+  <script>
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        groceryList: [
+          { text: 'Vegetables' },
+          { text: 'Cheese' },
+          { text: 'Whatever else humans are supposed to eat' }
+        ],
+        msg: `Then took the other, as just as fair,
+              And having perhaps the better claim
+              Because it was grassy and wanted wear,
+              Though as for that the passing there
+              Had worn them really about the same,`,
+        id: 3,
+        seen: true
+      },
+      filters: {
+        capitalize: function (value, len) {
+          if (!value) return ''
+          value = value.toString()
+          return value.slice(0, len).toUpperCase() + value.slice(len)
+        }
+      }
+    })
+
+
+    var app2 = new Vue({
+      el: '#no-key-example',
+      data: {
+        loginType: 'username'
+      },
+      methods: {
+        toggleLoginType: function () {
+          return this.loginType = this.loginType === 'username' ? 'email' : 'username'
+        }
+      }
+    })
+
+    class Person {                                          // The 'class' keyword
+      constructor(name, age) {                            // Constructors
+        this.name = name;
+        this.age = age;
+      }
+    }
+
+    class Developer extends Person {                        // The 'extends' keyword
+      constructor(name, age, ...languages) {              // Rest parameters
+        super(name, age);                               // Super calls
+        this.languages = [...languages];                // The spread operator
+      }
+      printLanguages() {                                  // Short method definitions
+        for (let lang of this.languages) {               // The for..of loop
+          console.log(lang);
+        }
+      }
+    }
+
+    let me = new Developer("James", 23, "ES5", "ES6");     // Block scoping
+
+    var logUpperCase = function () {
+      this.string = this.string.toUpperCase()
+      return () => console.log(this.string)
+    }
+
+    logUpperCase.call({ string: 'es6 rocks' })();
+
+    var ids = ['5632953c4e345e145fdf2df8', '563295464e345e145fdf2df9']
+    var messages = ids.map(value => `ID is ${value}`) // implicit return
+
+    var wait1000 = () => new Promise((resolve, reject) => { setTimeout(resolve, 1000) })
+
+    wait1000()
+      .then(function () {
+        console.log('Yay!')
+        return wait1000()
+      })
+      .then(function () {
+        console.log('Wheeyee!')
+      });
+  </script>
 </body>
+
 </html>
