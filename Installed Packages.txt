@@ -1,1 +1,4 @@
 Vue 2 Snippets  -- hollowtree
+D3.js Snippets -- yoyo
+
+npm install -g http-server
