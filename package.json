@@ -1,0 +1,18 @@
+{
+  "name": "VueJs",
+  "version": "0.1.0",
+  "private": false,
+  "homepage": "https://knight3001.github.io/VueJs/",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:knight3001/VueJs.git"
+  },
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "lite-server"
+  }
+}
