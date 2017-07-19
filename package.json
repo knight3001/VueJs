@@ -9,7 +9,10 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "formidable": "^1.1.1",
+    "nodemailer": "^4.0.1",
+    "mongodb": "^2.2.30"
   },
   "devDependencies": {},
   "scripts": {
